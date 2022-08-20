@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('prova');
 });
+
+Auth::routes();
+
+Route::middleware('auth')
+    ->namespace('Admin') // Cartella da creare per i controller
+    ->name('admin')	// Nome della rotta
+    ->prefix('admin') // Primo pezzettino dell'URL
+    ->group(function() { // Inseriamo tutte le rotte
+        Route::get('/', 'HomeController@index')->name('home');
+    });
